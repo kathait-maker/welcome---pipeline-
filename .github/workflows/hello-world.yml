@@ -2,9 +2,11 @@ name: Hello World CI-CD Pipeline
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
   pull_request:
-    branches: [main]
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -22,30 +24,19 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install pytest
+        run: pip install pytest
+
       - name: Run Hello World application
         run: python app.py
 
       - name: Run automated tests
-        run: python -m unittest -v
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: hello-world-package
-          path: |
-            app.py
-            test_app.py
-
-
-      - name: Package application
-        run: |
-          mkdir dist
-          cp app.py test_app.py dist/
-          cd dist
-          zip ../hello-world.zip app.py test_app.py
+        run: pytest -v
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: hello-world-package-v1
-          path: hello-world.zip
+          name: hello-world-package-${{ github.run_number }}
+          path: |
+            app.py
+            test_app.py

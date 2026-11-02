@@ -47,5 +47,5 @@ jobs:
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: hello-world-package
+          name: hello-world-package-v1
           path: hello-world.zip

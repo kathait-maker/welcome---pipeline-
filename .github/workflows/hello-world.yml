@@ -28,6 +28,15 @@ jobs:
       - name: Run automated tests
         run: python -m unittest -v
 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hello-world-package
+          path: |
+            app.py
+            test_app.py
+
+
       - name: Package application
         run: |
           mkdir dist

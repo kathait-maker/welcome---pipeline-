@@ -1,3 +1,4 @@
+# Exercise 3 comment
 def hello_world():
     return "Hello, DevOps!"
 
